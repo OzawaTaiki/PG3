@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <iostream>
 // PG proj
 // LE2A_06_オザワ
 
@@ -26,12 +26,13 @@ T Min(T _dig0, T _dig1)
 	if (result > _dig1)
 		result = _dig1;
 
+	std::cout << std::endl << _dig0 << "," << _dig1 << std::endl;
 	return static_cast<T>(result);
 };
 
 template<>
 inline char Min<char>(char _char0, char _char1)
 {
-	printf("数字以外は代入できません\n");
-	return '-';
+	printf("\n数字以外は代入できません\n");
+	return char();
 }
