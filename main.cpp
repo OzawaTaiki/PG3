@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Windows.h>
 #include <random>
+#include <functional>
+#include <string>
 // PG proj
 // LE2A_06_オザワ
 
@@ -9,7 +11,7 @@ typedef void (*pFunc)(int);
 int Input();
 int GetAnswer();
 void SetTimeOut(int _second);
-void CheckAns(pFunc _p, int _in);
+std::string CheckAns(bool _flag);
 
 int main() {
 
@@ -17,7 +19,9 @@ int main() {
 
 	int in =Input();
 	
-	CheckAns(p, in);
+	std::function<bool()> f = [in](int _ans) { return _ans == in; };
+
+	CheckAns();
 
 	return 0;
 }
@@ -52,12 +56,10 @@ void SetTimeOut(int _second)
 	Sleep(_second * 1000);
 }
 
-void CheckAns(pFunc _p, int _in)
+std::string  CheckAns(bool _flag)
 {
-	_p(3);
-
-	if (GetAnswer() == _in)
-		std::cout << "正解" << std::endl;
-	else 
-		std::cout << "不正解" << std::endl;
+	if (_flag)
+		return "正解";
+	else
+		return "不正解";
 }
