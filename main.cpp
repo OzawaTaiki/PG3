@@ -4,10 +4,17 @@
 // PG proj
 // LE2A_06_オザワ
 
+typedef void (*Func)();
+
+// 乱数
+// 入力受付
+// スリープ
+// 判定
+// 出力
+
 int main() {
 
-	printf("Hello World\n");
-	printf("ハローワールド\n");
+
 
 	return 0;
 }
