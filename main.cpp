@@ -42,9 +42,10 @@ int GetAnswer()
 	std::mt19937 random;
 	std::random_device rd;
 	random.seed(rd());
-	std::uniform_real_distribution<>dist(0, 99);
+	std::uniform_real_distribution<>dist(1, 6);
 	int ans = static_cast<int> (dist(random));
-	return ans % 2;
+	std::cout << "出目:" << ans << std::endl;
+	return ans;
 }
 
 void SetTimeOut(int _second)
@@ -55,8 +56,9 @@ void SetTimeOut(int _second)
 void CheckAns(pFunc _p, int _in)
 {
 	_p(3);
+	int ans = GetAnswer();
 
-	if (GetAnswer() == _in)
+	if (ans % 2 == _in)
 		std::cout << "正解" << std::endl;
 	else 
 		std::cout << "不正解" << std::endl;
