@@ -15,16 +15,21 @@ int main() {
 	const int kWages = 1072;
 	const int kstartWages = 100;
 	int time = 1;
-	bool isRecursive = false;
 
-	std::cout << "給料体系 0:一般 1:再帰" << std::endl;	
-	std::cin >> isRecursive;
+	std::cout << "一般 : 時給." << kWages << std::endl;
+	for (uint32_t i = 0; i < 10; i++)
+	{
+		int result = CalculateSalary(kWages, time, false);
+		std::cout << time++ << "hour\t" << "給料 : "   << result << std::endl;
 
-	std::cout << "働いた時間" << std::endl;	
-	std::cin >> time;
-
-	int result = CalculateSalary(isRecursive ? kstartWages : kWages, time, isRecursive);
-	std::cout << "給料 : " << result << std::endl;
+	}
+	time = 1;
+	std::cout << std::endl << "再帰 : 開始賃金." << kstartWages << std::endl;
+	for (uint32_t i = 0; i < 10; i++)
+	{
+		int result = CalculateSalary(kstartWages, time, true);
+		std::cout << time++ << "hour\t" << "給料 : " << result << std::endl;
+	}
 
 	//std::cout << FindHoursUntilRecursiveSalaryExceeds(1072,100) << std::endl;
 
