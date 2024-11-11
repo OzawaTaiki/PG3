@@ -129,7 +129,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Logicool.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RealForce.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RealForce.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseKeyBoard.h" />
+    <ClInclude Include="Logicool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
