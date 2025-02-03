@@ -4,6 +4,8 @@
 #include <vector>
 #include <fstream>
 
+#include <mutex>
+
 class CSVHandler
 {
 public:
@@ -14,11 +16,17 @@ public:
     void ReadCSV(const std::string& _filename);
     void WriteCSV(const std::string& _filename);
 
-    std::vector<std::vector<std::string>> GetData() const { return data; }
+    bool IsReady();
+
+    std::vector<std::vector<std::string>> GetData();
 
 private:
 
+    std::mutex mutex_;
+
     std::vector<std::vector<std::string>> data;
+
+    bool ready_ = false;
 
 
 

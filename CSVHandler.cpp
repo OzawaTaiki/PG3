@@ -9,6 +9,10 @@ CSVHandler::CSVHandler(const std::string& _filename)
 
 void CSVHandler::ReadCSV(const std::string& _filename)
 {
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    ready_ = false;
+
     std::ifstream file(_filename);
 
     if (!file.is_open())
@@ -33,9 +37,23 @@ void CSVHandler::ReadCSV(const std::string& _filename)
             data.back().push_back(cell);
         }
     }
+
+    ready_ = true;
 }
 
 void CSVHandler::WriteCSV(const std::string& _filename)
 {
+}
+
+bool CSVHandler::IsReady()
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    return ready_;
+}
+
+std::vector<std::vector<std::string>> CSVHandler::GetData()
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    return data;
 }
 

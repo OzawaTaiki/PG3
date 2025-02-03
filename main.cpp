@@ -13,19 +13,33 @@ int main() {
 
     CSVHandler csv;
     std::vector<std::vector<std::string>> data;
+    std::string filename = "data/test.csv";
 
     std::thread t([&]() {
-        csv.ReadCSV("data/test.csv");
+        csv.ReadCSV(filename);
         });
-    t.detach();
 
-    while (!t.joinable())
+    // csv読み込み中
+    std::cout << "Loading :" << filename << std::endl;
+
+    uint32_t count = 0;
+    while (true)
     {
-        std::cout << "Waiting for thread to join..." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if (csv.IsReady())
+        {
+            break;
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+        count++;
+        if (count % 100 == 0)
+        {
+            std::cout << "Main thread is still running..." << std::endl;
+        }
     }
 
-
+    std::cout << "CSV file loaded!" << std::endl << std::endl;
 
     data = csv.GetData();
 
@@ -35,11 +49,13 @@ int main() {
         {
 
             std::cout << cell << ",";
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
         }
         std::cout << std::endl;
     }
 
+    t.join();
 
 	return 0;
 }
